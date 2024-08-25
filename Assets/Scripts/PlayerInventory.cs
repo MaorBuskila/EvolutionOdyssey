@@ -17,14 +17,22 @@ public class PlayerInventory : MonoBehaviour
         if (inventory.Contains("Rock") && inventory.Contains("Wood"))
         {
             Debug.Log("Fire Created!");
-            // Remove items from inventory
-            inventory.Remove("Rock");
-            inventory.Remove("Wood");
-            // Move to next level or trigger next action
+            // Move to the next level or trigger the next action
+            // Example: Call a method from another script that handles level progression
         }
         else
         {
             Debug.Log("Combination not yet complete");
         }
+    }
+
+    public bool HasItem(string item)
+    {
+        return inventory.Contains(item);
+    }
+
+    public List<string> GetInventoryItems()
+    {
+        return new List<string>(inventory);
     }
 }

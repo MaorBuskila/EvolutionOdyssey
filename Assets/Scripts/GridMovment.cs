@@ -8,6 +8,13 @@ public class GridMovement : MonoBehaviour
     private float timeToMove = 0.3f;
     public LayerMask obstacleLayer;
 
+    private Animator animator;
+
+    void Start()
+    {
+        animator = GetComponent<Animator>();
+    }
+
     void Update()
     {
         if (Input.GetKey(KeyCode.W) && !isMoving)
@@ -16,6 +23,8 @@ public class GridMovement : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.A) && !isMoving)
         {
+            animator.SetBool("isMovingLeft", true);
+            animator.SetBool("isMovingRight", false);
             StartCoroutine(MovePlayer(Vector3.left));
         }
         if (Input.GetKey(KeyCode.S) && !isMoving)
@@ -24,6 +33,8 @@ public class GridMovement : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.D) && !isMoving)
         {
+            animator.SetBool("isMovingRight", true);
+            animator.SetBool("isMovingLeft", false);
             StartCoroutine(MovePlayer(Vector3.right));
         }
     }
