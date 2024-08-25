@@ -2,9 +2,9 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 
-public class LevelTimer : MonoBehaviour
+public class Level2Timer : MonoBehaviour
 {
-    public float timeLimit = 15f;
+    public float timeLimit = 20f;
     private float timer;
     private bool timerEnded = false;  // New flag to check if the timer has ended
 
@@ -12,12 +12,10 @@ public class LevelTimer : MonoBehaviour
 
     public TextMeshProUGUI timerText;  // Reference to the UI Text for the timer
     public TextMeshProUGUI inventoryText;  // Reference to the UI Text for the inventory
-    public TextMeshProUGUI levelText;  // Reference to the UI Text for the level number
 
     void Start()
     {
         timer = timeLimit;
-        UpdateLevelText();  // Update the level text at the start of the level
     }
 
     void Update()
@@ -42,15 +40,9 @@ public class LevelTimer : MonoBehaviour
         inventoryText.text = "Inventory:\n" + string.Join("\n", playerInventory.GetInventoryItems());
     }
 
-    void UpdateLevelText()
-    {
-        string levelName = SceneManager.GetActiveScene().name;
-        levelText.text = "Level: " + levelName;
-    }
-
     void CheckCondition()
     {
-        if (SceneManager.GetActiveScene().name == "Level1")
+        if (SceneManager.GetActiveScene().name == "Level2")
         {
             if (playerInventory.HasItem("Rock") && playerInventory.HasItem("Wood"))
             {
@@ -65,7 +57,7 @@ public class LevelTimer : MonoBehaviour
 
     void LoadNextLevel()
     {
-        SceneManager.LoadScene("Level2");  // Load the next level
+        SceneManager.LoadScene("Level3");  // Load the next level
     }
 
     void GameOver()

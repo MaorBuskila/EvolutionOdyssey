@@ -64,15 +64,15 @@
     <Analyzer Include="/Applications/Unity/Hub/Editor/2022.3.33f1/Unity.app/Contents/Tools/Unity.SourceGenerators/Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets/game-manager.cs" />
+    <Compile Include="Assets/Scripts/game-manager.cs" />
+    <Compile Include="Assets/Scripts/PlayerInventory.cs" />
+    <Compile Include="Assets/Scripts/Level2/Level2Timer.cs" />
     <Compile Include="Assets/Scripts/LevelTimer.cs" />
     <Compile Include="Assets/Grid.cs" />
     <Compile Include="Assets/MainMenuController.cs" />
-    <Compile Include="Assets/PlayerInventory.cs" />
-    <Compile Include="Assets/Scripts/TaskManager.cs" />
+    <Compile Include="Assets/Scripts/Level1/Level1Timer.cs" />
+    <Compile Include="Assets/Scripts/GridMovment.cs" />
     <Compile Include="Assets/Interactable.cs" />
-    <Compile Include="Assets/Scripts/PlayerMovement.cs" />
-    <Compile Include="Assets/GridMovment.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/TextMesh Pro/Shaders/TMPro.cginc" />

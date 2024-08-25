@@ -2543,7 +2543,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9eea3034761c8410da98251d86b149d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeLimit: 90
+  timeLimit: 15
   playerInventory: {fileID: 1021796417}
   timerText: {fileID: 1454653311}
   inventoryText: {fileID: 63694862}
