@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 2560
     height: 1387
   m_ShowMode: 4
-  m_Title: Game
+  m_Title: Scene
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 371}
   m_MaxSize: {x: 10000, y: 10000}
@@ -118,7 +118,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 39
+  controlID: 46
   draggingID: 0
 --- !u!114 &6
 MonoBehaviour:
@@ -144,7 +144,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 1
-  controlID: 40
+  controlID: 47
   draggingID: 0
 --- !u!114 &7
 MonoBehaviour:
@@ -170,7 +170,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 50}
   m_MaxSize: {x: 24288, y: 8096}
   vertical: 0
-  controlID: 41
+  controlID: 48
   draggingID: 0
 --- !u!114 &8
 MonoBehaviour:
@@ -222,7 +222,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 50}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 42
+  controlID: 49
   draggingID: 0
 --- !u!114 &10
 MonoBehaviour:
@@ -714,9 +714,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -7.744986, y: -5.693489, z: -1.0421897}
+    m_Target: {x: 4.8815823, y: 0.10733078, z: 0.09905162}
     speed: 2
-    m_Value: {x: -7.744986, y: -5.693489, z: -1.0421897}
+    m_Value: {x: 5.861513, y: 0.0769037, z: 0.09131945}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -766,9 +766,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 11.34327
+    m_Target: 8.514554
     speed: 2
-    m_Value: 11.34327
+    m_Value: 9.28776
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -830,25 +830,25 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: a66d0000
-      m_LastClickedID: 28070
-      m_ExpandedIDs: 3278feff8c0bffff7652ffff8452ffff2893ffff6693ffffa493ffff5496ffff66a7ffff00f6ffff7ef6ffffd4f6ffff08f7ffff46f7ffff78f7ffffacf7ffffe4f7ffff26f8ffff5ef8ffff8ef8ffffd0f8ffff1afbffffc26d0000ce6d0000e66d0000ee6d0000f46d0000
+      m_SelectedIDs: 
+      m_LastClickedID: 0
+      m_ExpandedIDs: 8cafffffe4afffff5ab0ffff92b0ffffdcb0ffff18b1ffff50b1ffff90b1ffff88b3ffffccb3ffff16b4ffff5ab4ffffa2b4fffff2b4ffff30b5ffff1eb6ffff66b6ffffa4f0ffff50f7ffff8cf7ffffcaf7ffffc4faffff226f0000906f0000f06f000056760000c476000024770000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: 
-        m_OriginalName: 
+        m_Name: Tilemap
+        m_OriginalName: Tilemap
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: 0
+        m_UserData: 30500
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 11
+        m_OriginalEventType: 0
         m_IsRenamingFilename: 0
-        m_ClientGUIView: {fileID: 0}
+        m_ClientGUIView: {fileID: 8}
       m_SearchString: 
     m_ExpandedScenes: []
     m_CurrenRootInstanceID: 0
@@ -1118,7 +1118,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Images
+    - Assets
     m_Globs: []
     m_OriginalText: 
     m_ImportLogFlags: 0
@@ -1126,27 +1126,27 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Images
+  - Assets
   m_LastFoldersGridSize: -1
-  m_LastProjectPath: /Users/noamgilad/Evolution Odyssey
+  m_LastProjectPath: /Applications/Repos/EvolutionOdyssey
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 2c620000
-    m_LastClickedID: 25132
-    m_ExpandedIDs: 00000000126200001462000016620000186200001a6200001c62000000ca9a3b
+    m_SelectedIDs: 28640000
+    m_LastClickedID: 25640
+    m_ExpandedIDs: 00000000286400000a6500008e67000090670000926700009467000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: Scenes
-      m_OriginalName: Scenes
+      m_Name: flat-design-low-poly-nature-elements
+      m_OriginalName: flat-design-low-poly-nature-elements
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 25134
+      m_UserData: 25656
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
       m_OriginalEventType: 0
@@ -1163,7 +1163,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 00ddffff
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000126200001462000016620000186200001a6200001c620000
+    m_ExpandedIDs: 0000000028640000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1191,7 +1191,7 @@ MonoBehaviour:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
     m_HadKeyboardFocusLastEvent: 1
-    m_ExpandedInstanceIDs: c6230000685a0000625c0000326700005a5900005e590000c45a0000ee5f000002610000f4610000e66200002a6500003c6d0000f4c000002eac000066540000bc0201001ef6000058f6000000000000ca6c0000
+    m_ExpandedInstanceIDs: c6230000685a0000625c0000326700005a5900005e590000c45a0000ee5f000002610000f4610000e66200002a6500003c6d0000f4c000002eac000066540000bc0201001ef6000058f6000000000000ca6c0000e66c0000346500005c650000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
