@@ -4,13 +4,26 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance;
-    public GameObject gameOverScreen;
-    public GameObject pauseCanvas;
-    public Button restartButton;
-    public Button exitButton;
+    private static GameManager _instance;
+    public static GameManager Instance
+    {
+        get { return _instance; }
+        private set { _instance = value; }
+    }
+
+    [Header("Game Over Panel")]
+    public GameObject gameOverPanel;
+    public Button gameOverRestartButton;
+    public Button gameOverMainMenuButton;
+
+    [Header("Pause Panel")]
+    public GameObject pausePanel;
+    public Button pauseResumeButton;
+    public Button pauseRestartButton;
+    public Button pauseMainMenuButton;
+
+    [Header("Game Controls")]
     public Button pauseButton;
-    public Button resumeButton;
 
     private bool isPaused = false;
 
@@ -20,61 +33,144 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+            SceneManager.sceneLoaded += OnSceneLoaded;
         }
         else
         {
             Destroy(gameObject);
+            return;
         }
     }
 
-    private void Start()
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        // Set up button listeners
-        if (restartButton != null)
-            restartButton.onClick.AddListener(RestartGame);
-        if (exitButton != null)
-            exitButton.onClick.AddListener(ReturnToMainMenu);
+        FindReferences();
+        SetupButtonListeners();
+        ResumeGame(); // Ensure the game is not paused when a new scene loads
+    }
+
+    private void FindReferences()
+    {
+        gameOverPanel = GameObject.Find("GameOverCanvas")?.gameObject;
+        pausePanel = GameObject.Find("PausedCanvas")?.gameObject;
+        pauseButton = GameObject.Find("Canvas")?.transform.Find("PauseButton")?.GetComponent<Button>();
+
+        if (gameOverPanel != null)
+        {
+            gameOverRestartButton = gameOverPanel.transform.Find("Buttons/RestartButton")?.GetComponent<Button>();
+            gameOverMainMenuButton = gameOverPanel.transform.Find("Buttons/MainMenuButton")?.GetComponent<Button>();
+        }
+        else
+        {
+            Debug.Log("gameOverPanel not found");
+
+        }
+
+        if (pausePanel != null)
+        {
+            pauseResumeButton = pausePanel.transform.Find("Buttons/ResumeButton")?.GetComponent<Button>();
+            pauseRestartButton = pausePanel.transform.Find("Buttons/RestartButton")?.GetComponent<Button>();
+            pauseMainMenuButton = pausePanel.transform.Find("Buttons/MainMenuButton")?.GetComponent<Button>();
+        }
+        else
+        {
+            Debug.Log("pausePanel not found");
+
+        }
+
+    }
+
+    private void SetupButtonListeners()
+    {
+        if (gameOverRestartButton != null)
+            gameOverRestartButton.onClick.AddListener(RestartGame);
+        if (gameOverMainMenuButton != null)
+            gameOverMainMenuButton.onClick.AddListener(ReturnToMainMenu);
+
+        if (pauseResumeButton != null)
+            pauseResumeButton.onClick.AddListener(ResumeGame);
+        if (pauseRestartButton != null)
+            pauseRestartButton.onClick.AddListener(RestartGame);
+        if (pauseMainMenuButton != null)
+            pauseMainMenuButton.onClick.AddListener(ReturnToMainMenu);
+
         if (pauseButton != null)
-            pauseButton.onClick.AddListener(TogglePause);
-        if (resumeButton != null)
-            resumeButton.onClick.AddListener(TogglePause);
+            pauseButton.onClick.AddListener(PauseGame);
+        else
+        {
+            Debug.Log("pauseButton not found");
+        }
+
+        Debug.Log("Button listeners set up");
     }
 
     public void GameOver()
     {
-        if (gameOverScreen != null)
-        {
-            gameOverScreen.SetActive(true);
-        }
         Time.timeScale = 0;
+        if (gameOverPanel != null)
+        {
+            gameOverPanel.SetActive(true);
+            Debug.Log("Game Over panel activated");
+        }
+        else
+        {
+            Debug.LogError("Game Over panel is null");
+        }
+    }
+
+    public void PauseGame()
+    {
+        Debug.Log("PauseGame called");
+        isPaused = true;
+        Time.timeScale = 0;
+        if (pausePanel != null)
+        {
+            pausePanel.SetActive(true);
+            Debug.Log("Pause panel activated");
+        }
+        else
+        {
+            Debug.LogError("Pause panel is null");
+        }
+    }
+
+    public void ResumeGame()
+    {
+        Debug.Log("ResumeGame called");
+        isPaused = false;
+        Time.timeScale = 1;
+        if (pausePanel != null)
+        {
+            pausePanel.SetActive(false);
+            Debug.Log("Pause panel deactivated");
+        }
+        else
+        {
+            Debug.LogError("Pause panel is null");
+        }
     }
 
     public void RestartGame()
     {
+        Debug.Log("RestartGame called");
         Time.timeScale = 1;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void ReturnToMainMenu()
     {
+        Debug.Log("ReturnToMainMenu called");
         Time.timeScale = 1;
-        SceneManager.LoadScene("MainMenuScene");
+        SceneManager.LoadScene("MainMenuScene"); // Make sure you have a scene named "MainMenuScene"
     }
 
-    public void TogglePause()
+    public bool IsGamePaused()
     {
-        isPaused = !isPaused;
-        if (isPaused)
-        {
-            Time.timeScale = 0;
-            if (pauseCanvas != null)
-                pauseCanvas.SetActive(true);
-        }
-        else
-        {
-            Time.timeScale = 1;
-            if (pauseCanvas != null)
-                pauseCanvas.SetActive(false);
-        }
+        return isPaused;
+    }
+
+    private void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 }

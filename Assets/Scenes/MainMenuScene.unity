@@ -622,6 +622,7 @@ RectTransform:
   - {fileID: 1322251355}
   - {fileID: 2010021401}
   - {fileID: 1222690017}
+  - {fileID: 2091377851}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -874,7 +875,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1958406871}
         m_TargetAssemblyTypeName: MainMenuController, Assembly-CSharp
-        m_MethodName: ExitGame
+        m_MethodName: BackToMainMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1075,7 +1076,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1222690017
 Transform:
   m_ObjectHideFlags: 0
@@ -1092,7 +1093,6 @@ Transform:
   - {fileID: 509795876}
   - {fileID: 1391030802}
   - {fileID: 1809565524}
-  - {fileID: 2091377851}
   m_Father: {fileID: 538252797}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1322251354
@@ -1957,17 +1957,17 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2091377850}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 18.641771}
-  m_LocalScale: {x: 0.96349996, y: 0.96349996, z: 0.96349996}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 909454213}
   - {fileID: 1761967631}
-  m_Father: {fileID: 1222690017}
+  m_Father: {fileID: 538252797}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -243.9418, y: -391.89517}
+  m_AnchoredPosition: {x: 0.000045776367, y: 0.000030517578}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1660057539 &9223372036854775807
