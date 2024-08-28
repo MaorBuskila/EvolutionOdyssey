@@ -415,7 +415,7 @@ Transform:
   m_GameObject: {fileID: 85465621}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 505, y: 597, z: -1.05}
+  m_LocalPosition: {x: 0, y: 0, z: -1.05}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2117,9 +2117,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d15c1948edd196447ae4c43bb095e561, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameOverPanel: {fileID: 0}
-  gameOverRestartButton: {fileID: 0}
-  gameOverMainMenuButton: {fileID: 0}
+  gameOverPanel: {fileID: 1023277973}
+  gameOverRestartButton: {fileID: 77359058}
+  gameOverMainMenuButton: {fileID: 77359058}
   pausePanel: {fileID: 0}
   pauseResumeButton: {fileID: 0}
   pauseRestartButton: {fileID: 0}
@@ -3244,7 +3244,7 @@ Transform:
   m_GameObject: {fileID: 1455370886}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 504.4963, y: 597.7633, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.71585315, y: 0.7102293, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3265,6 +3265,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d8f3ea0b59b94ee68c6ee63189c592f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  craftingRecipes: []
 --- !u!114 &1455370894
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3294,6 +3295,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   thoughtBubblePanel: {fileID: 1492353247}
   thoughtBubbleText: {fileID: 1173377662}
+  bubbleRect: {fileID: 0}
+  displayDuration: 3
+  padding: {x: 20, y: 20}
+  minWidth: 100
+  maxWidth: 300
+  minHeight: 50
+  maxHeight: 200
 --- !u!212 &1455370896
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3481,7 +3489,7 @@ Transform:
   m_GameObject: {fileID: 1500361988}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 505, y: 597, z: 0.1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.1}
   m_LocalScale: {x: 1.275, y: 1.275, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

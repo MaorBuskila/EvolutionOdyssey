@@ -1,52 +1,100 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using System.Collections.Generic;
 
-public class Level2Timer : MonoBehaviour
+public class LevelTimer : MonoBehaviour
 {
-    public float timeLimit = 20f;
+    public float timeLimit = 180f; // 3 minutes for Level 2
     private float timer;
     private bool timerEnded = false;
-
     public PlayerInventory playerInventory;
     public GameObject gameOverMenu;
-    public ThoughtBubbleController thoughtBubbleController;  // Reference to the thought bubble controller
-
+    public ThoughtBubbleController thoughtBubbleController;
     public TextMeshProUGUI timerText;
     public TextMeshProUGUI inventoryText;
+    public TextMeshProUGUI objectiveText;
+    public TextMeshProUGUI temperatureText;
+
+    private float playerTemperature = 100f; // Starting temperature
+    private float temperatureDecreaseRate = 1f; // Degrees per second
+
+    [System.Serializable]
+    public class Objective
+    {
+        public string description;
+        public List<string> requiredItems;
+        public string thoughtBubble;
+    }
+
+    public List<Objective> objectives;
+    private int currentObjectiveIndex = 0;
 
     void Start()
     {
         timer = timeLimit;
         gameOverMenu.SetActive(false);
-
-        // Show the thought bubble at the start of the level
-        thoughtBubbleController.ShowThought("I'm hungry...");
+        UpdateObjective();
     }
 
     void Update()
     {
         if (timerEnded) return;
-
+        
         timer -= Time.deltaTime;
+        playerTemperature -= temperatureDecreaseRate * Time.deltaTime;
+        
         UpdateUI();
-
-        if (timer <= 0)
+        CheckCurrentObjective();
+        
+        if (timer <= 0 || playerTemperature <= 0)
         {
             timerEnded = true;
-            CheckCondition();
+            CheckFinalCondition();
         }
     }
 
     void UpdateUI()
     {
         timerText.text = "Time: " + Mathf.Ceil(timer).ToString();
+        temperatureText.text = "Temperature: " + Mathf.Ceil(playerTemperature).ToString();
         inventoryText.text = "Inventory:\n" + string.Join("\n", playerInventory.GetInventoryItems());
+        objectiveText.text = "Objective: " + objectives[currentObjectiveIndex].description;
     }
 
-    void CheckCondition()
+    void CheckCurrentObjective()
     {
-        if (playerInventory.HasItem("Rock") && playerInventory.HasItem("Wood"))
+        Objective currentObjective = objectives[currentObjectiveIndex];
+        bool objectiveComplete = true;
+        foreach (string item in currentObjective.requiredItems)
+        {
+            if (!playerInventory.HasItem(item))
+            {
+                objectiveComplete = false;
+                break;
+            }
+        }
+
+        if (objectiveComplete)
+        {
+            currentObjectiveIndex++;
+            if (currentObjectiveIndex < objectives.Count)
+            {
+                UpdateObjective();
+            }
+        }
+    }
+
+    void UpdateObjective()
+    {
+        Objective currentObjective = objectives[currentObjectiveIndex];
+        thoughtBubbleController.ShowThought(currentObjective.thoughtBubble);
+        UpdateUI();
+    }
+
+    void CheckFinalCondition()
+    {
+        if (currentObjectiveIndex >= objectives.Count)
         {
             LoadNextLevel();
         }
@@ -58,7 +106,7 @@ public class Level2Timer : MonoBehaviour
 
     void LoadNextLevel()
     {
-        SceneManager.LoadScene("Level1");//TODO: Change to Level3
+        SceneManager.LoadScene("Level3"); // Assuming there's a Level 3
     }
 
     void GameOver()
@@ -72,5 +120,15 @@ public class Level2Timer : MonoBehaviour
         {
             Debug.LogError("GameOverMenu reference is not set in the Inspector");
         }
+    }
+
+    public void DecreaseTemperature(float amount)
+    {
+        playerTemperature -= amount;
+    }
+
+    public void IncreaseTemperature(float amount)
+    {
+        playerTemperature = Mathf.Min(playerTemperature + amount, 100f);
     }
 }

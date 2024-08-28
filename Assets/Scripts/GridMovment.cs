@@ -5,7 +5,7 @@ public class GridMovement : MonoBehaviour
 {
     private bool isMoving;
     private Vector3 origPos, targetPos;
-    private float timeToMove = 0.3f;
+    private float timeToMove = 0.05f;
     public LayerMask obstacleLayer;
 
     private Animator animator;

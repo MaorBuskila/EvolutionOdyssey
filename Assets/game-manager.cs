@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviour
     {
         FindReferences();
         SetupButtonListeners();
-        ResumeGame(); // Ensure the game is not paused when a new scene loads
+        // ResumeGame(); // Ensure the game is not paused when a new scene loads
     }
 
     private void FindReferences()

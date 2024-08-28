@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "EvolutionOdyssey.sln"
+    "dotnet.defaultSolution": "EvolutionOdyssey-main.sln"
 }
