@@ -46,13 +46,13 @@ public class GameManager : MonoBehaviour
     {
         FindReferences();
         SetupButtonListeners();
-        // ResumeGame(); // Ensure the game is not paused when a new scene loads
+        ResumeGame(); // Ensure the game is not paused when a new scene loads
     }
 
     private void FindReferences()
     {
-        gameOverPanel = GameObject.Find("GameOverCanvas")?.gameObject;
-        pausePanel = GameObject.Find("PausedCanvas")?.gameObject;
+        gameOverPanel = GameObject.Find("GameOverMenu")?.gameObject;
+        pausePanel = GameObject.Find("PausedMenu")?.gameObject;
         pauseButton = GameObject.Find("Canvas")?.transform.Find("PauseButton")?.GetComponent<Button>();
 
         if (gameOverPanel != null)

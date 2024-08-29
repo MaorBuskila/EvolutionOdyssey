@@ -26,8 +26,8 @@ public class PauseMenu : MonoBehaviour
         Debug.Log("RestartGame called");
         Time.timeScale = 1;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        pauseMenu.SetActive(false);
-        gameOverMenu.SetActive(false);
+        // pauseMenu.SetActive(false);
+        // gameOverMenu.SetActive(false);
     }
 
     public void Home(int sceneID)
