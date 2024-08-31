@@ -9,33 +9,42 @@ public class GridMovement : MonoBehaviour
     public LayerMask obstacleLayer;
 
     private Animator animator;
+    private LevelManager levelManager;
 
     void Start()
     {
         animator = GetComponent<Animator>();
+        levelManager = FindObjectOfType<LevelManager>(); // Get reference to Level1Manager
     }
 
     void Update()
     {
+        if (levelManager.IsGameOver()) return; // Stop movement if the game is over
+
         if (Input.GetKey(KeyCode.W) && !isMoving)
         {
             StartCoroutine(MovePlayer(Vector3.up));
         }
-        if (Input.GetKey(KeyCode.A) && !isMoving)
+        else if (Input.GetKey(KeyCode.A) && !isMoving)
         {
             animator.SetBool("isMovingLeft", true);
             animator.SetBool("isMovingRight", false);
             StartCoroutine(MovePlayer(Vector3.left));
         }
-        if (Input.GetKey(KeyCode.S) && !isMoving)
+        else if (Input.GetKey(KeyCode.S) && !isMoving)
         {
             StartCoroutine(MovePlayer(Vector3.down));
         }
-        if (Input.GetKey(KeyCode.D) && !isMoving)
+        else if (Input.GetKey(KeyCode.D) && !isMoving)
         {
             animator.SetBool("isMovingRight", true);
             animator.SetBool("isMovingLeft", false);
             StartCoroutine(MovePlayer(Vector3.right));
+        }
+        else
+        {
+            animator.SetBool("isMovingLeft", false);
+            animator.SetBool("isMovingRight", false);
         }
     }
 
@@ -46,35 +55,19 @@ public class GridMovement : MonoBehaviour
         origPos = transform.position;
         targetPos = origPos + direction;
 
-        // Check if there is an obstacle in the direction
-        RaycastHit2D hit = Physics2D.Raycast(origPos, direction, 1f, obstacleLayer);
+        // Cast a narrow box along the direction of movement, starting at the player's position
+        Vector2 castDirection = new Vector2(direction.x, direction.y);
+        Vector2 castOrigin = new Vector2(transform.position.x, transform.position.y - 0.5f); // Adjust for the player's feet position
+        RaycastHit2D hit = Physics2D.BoxCast(castOrigin, new Vector2(0.8f, 0.1f), 0, castDirection, 1f, obstacleLayer);
+
+        // Debugging: Visualize the BoxCast
+        Debug.DrawRay(castOrigin, castDirection * 1f, Color.red, 0.5f);
 
         if (hit.collider != null)
         {
-            // Check if the obstacle can be moved
-            Interactable interactable = hit.collider.GetComponent<Interactable>();
-            if (interactable != null && interactable.isPushable)
-            {
-                Vector3 obstacleTargetPos = hit.collider.transform.position + direction;
-                RaycastHit2D obstacleHit = Physics2D.Raycast(hit.collider.transform.position, direction, 1f, obstacleLayer);
-                if (obstacleHit.collider == null)
-                {
-                    // Move the obstacle
-                    StartCoroutine(MoveObstacle(hit.collider.gameObject, obstacleTargetPos));
-                }
-                else
-                {
-                    // Can't move the obstacle, block the player movement
-                    isMoving = false;
-                    yield break;
-                }
-            }
-            else
-            {
-                // Can't move, block the player movement
-                isMoving = false;
-                yield break;
-            }
+            // Can't move, block the player movement
+            isMoving = false;
+            yield break;
         }
 
         while (elapsedTime < timeToMove)
@@ -86,18 +79,5 @@ public class GridMovement : MonoBehaviour
 
         transform.position = targetPos;
         isMoving = false;
-    }
-
-    private IEnumerator MoveObstacle(GameObject obstacle, Vector3 targetPos)
-    {
-        float elapsedTime = 0;
-        Vector3 origPos = obstacle.transform.position;
-        while (elapsedTime < timeToMove)
-        {
-            obstacle.transform.position = Vector3.Lerp(origPos, targetPos, (elapsedTime / timeToMove));
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
-        obstacle.transform.position = targetPos;
     }
 }

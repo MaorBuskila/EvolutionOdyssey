@@ -3295,13 +3295,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   thoughtBubblePanel: {fileID: 1492353247}
   thoughtBubbleText: {fileID: 1173377662}
-  bubbleRect: {fileID: 0}
-  displayDuration: 3
-  padding: {x: 20, y: 20}
-  minWidth: 100
-  maxWidth: 300
-  minHeight: 50
-  maxHeight: 200
 --- !u!212 &1455370896
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3623,7 +3616,7 @@ SpriteRenderer:
   m_Size: {x: 2.64, y: 2.57}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &1573055199

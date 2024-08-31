@@ -1,24 +1,37 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
-using System.Text;  // Add this line
+using System.Text;
 
+[System.Serializable]
+public class CraftingRecipe
+{
+    public string result;  // Name of the crafted item, e.g., "Arch"
+    public Dictionary<string, int> ingredients;  // Required ingredients
+}
 
 public class PlayerInventory : MonoBehaviour
 {
     private Dictionary<string, int> inventory = new Dictionary<string, int>();
-    
+
     public delegate void InventoryChangeHandler(string item, int count);
     public event InventoryChangeHandler OnInventoryChanged;
 
-    [System.Serializable]
-    public class CraftingRecipe
+    public List<CraftingRecipe> craftingRecipes = new List<CraftingRecipe>
     {
-        public string result;
-        public Dictionary<string, int> ingredients;
-    }
+        new CraftingRecipe
+        {
+            result = "Arch",
+            ingredients = new Dictionary<string, int>
+            {
+                { "Wood", 1 },
+                { "Rock", 1 },
+                { "Vine", 1 }
+            }
+        }
+    };
 
-    public List<CraftingRecipe> craftingRecipes;
+    public Sprite archerSprite; // The new player sprite after crafting
 
     public void AddToInventory(string item)
     {
@@ -30,11 +43,65 @@ public class PlayerInventory : MonoBehaviour
         {
             inventory[item] = 1;
         }
-        
+
         Debug.Log($"{item} added to inventory. Total: {inventory[item]}");
         OnInventoryChanged?.Invoke(item, inventory[item]);
-        
+
         CheckForCrafting();
+    }
+
+    private void CheckForCrafting()
+    {
+        Debug.Log("Checking if crafting can be triggered...");
+
+        foreach (var recipe in craftingRecipes)
+        {
+            Debug.Log($"Checking recipe: {recipe.result}");
+
+            if (CanCraft(recipe))
+            {
+                Debug.Log($"Can craft {recipe.result}. Starting crafting process.");
+                CraftItem(recipe);
+                break;  // Only craft one item at a time
+            }
+            else
+            {
+                Debug.Log($"Cannot craft {recipe.result} yet. Missing items.");
+            }
+        }
+    }
+
+    private bool CanCraft(CraftingRecipe recipe)
+    {
+        bool canCraft = recipe.ingredients.All(ingredient =>
+            inventory.ContainsKey(ingredient.Key) && inventory[ingredient.Key] >= ingredient.Value);
+
+        foreach (var ingredient in recipe.ingredients)
+        {
+            Debug.Log($"Required: {ingredient.Key} x{ingredient.Value}, " +
+                      $"In Inventory: {(inventory.ContainsKey(ingredient.Key) ? inventory[ingredient.Key] : 0)}");
+        }
+
+        Debug.Log($"Checking if can craft {recipe.result}: {canCraft}");
+        return canCraft;
+    }
+
+    private void CraftItem(CraftingRecipe recipe)
+    {
+        Debug.Log($"Crafting {recipe.result}...");
+
+        foreach (var ingredient in recipe.ingredients)
+        {
+            Debug.Log($"Removing {ingredient.Value}x {ingredient.Key} from inventory.");
+            RemoveFromInventory(ingredient.Key, ingredient.Value);
+        }
+
+        AddToInventory(recipe.result);
+        Debug.Log($"{recipe.result} crafted!");
+
+        // Change the player sprite after crafting the Arch
+        GetComponent<SpriteRenderer>().sprite = archerSprite;
+        Debug.Log("Player sprite changed to Archer.");
     }
 
     public void RemoveFromInventory(string item, int count = 1)
@@ -47,36 +114,8 @@ public class PlayerInventory : MonoBehaviour
                 inventory.Remove(item);
             }
             OnInventoryChanged?.Invoke(item, inventory.ContainsKey(item) ? inventory[item] : 0);
+            Debug.Log($"Removed {item} from inventory. Remaining: {GetItemCount(item)}");
         }
-    }
-
-    private void CheckForCrafting()
-    {
-        foreach (var recipe in craftingRecipes)
-        {
-            if (CanCraft(recipe))
-            {
-                CraftItem(recipe);
-                break;  // Only craft one item at a time
-            }
-        }
-    }
-
-    private bool CanCraft(CraftingRecipe recipe)
-    {
-        return recipe.ingredients.All(ingredient => 
-            inventory.ContainsKey(ingredient.Key) && inventory[ingredient.Key] >= ingredient.Value);
-    }
-
-    private void CraftItem(CraftingRecipe recipe)
-    {
-        foreach (var ingredient in recipe.ingredients)
-        {
-            RemoveFromInventory(ingredient.Key, ingredient.Value);
-        }
-
-        AddToInventory(recipe.result);
-        Debug.Log($"{recipe.result} crafted!");
     }
 
     public bool HasItem(string item, int count = 1)
@@ -94,11 +133,11 @@ public class PlayerInventory : MonoBehaviour
         return inventory.ContainsKey(item) ? inventory[item] : 0;
     }
 
-        public override string ToString()
+    public override string ToString()
     {
         StringBuilder sb = new StringBuilder();
         sb.AppendLine("Player Inventory:");
-        
+
         if (inventory.Count == 0)
         {
             sb.AppendLine("  Empty");
@@ -114,4 +153,3 @@ public class PlayerInventory : MonoBehaviour
         return sb.ToString();
     }
 }
-

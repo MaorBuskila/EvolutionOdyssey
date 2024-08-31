@@ -225,7 +225,7 @@ public class MainMenuController : MonoBehaviour
             Destroy(GameManager.Instance.gameObject);
         }
         Debug.Log("MainMenuController: Loading GameScene");
-        SceneManager.LoadScene("GameScene");
+        SceneManager.LoadScene("L1");
     }
 
     public void ShowCredits()
